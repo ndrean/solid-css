@@ -1,3 +1,7 @@
+import { children, mergeProps } from "solid-js";
+// import { createComponent } from "solid-js/web";
+import h from "solid-js/h";
+import { createComponent } from "solid-js/web";
 const toHash = (str) => {
   let i = 0,
     out = 11;
@@ -21,16 +25,21 @@ export default function SolidCss({
 } = {}) {
   const styled =
     (tagName) =>
-    (takeProps) =>
+    (props) =>
     (strings, ...args) => {
       const className = classIt((name, compiled) => `.${name} { ${compiled} }`)(
         strings,
         ...args
       );
-      const element = document.createElement(tagName);
-      element.classList.add(className);
-      element.innerHTML = takeProps.children;
-      return element;
+      const resolved = children(() => props.children);
+      // const elt = document.createElement(tagName);
+      // elt.className = className;
+      // return createComponent(() => elt, {
+      //   get children() {
+      //     return resolved();
+      //   },
+      // });
+      return h(tagName, mergeProps({ class: className }), resolved());
     };
 
   const classIt =
