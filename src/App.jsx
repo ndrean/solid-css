@@ -7,11 +7,6 @@ import LogoSVG from "./logoSVG";
 import Logo from "./logo";
 const { css, keyframes, styled } = SolidCss();
 
-const Redh2 = (props) => styled("h2")(props)`
-color: ${props.color};
-font-size: "2em";
-`;
-
 const AnimSurf = (props) => styled("span")(props)`
   font-size: ${props.size}px;
   animation: ${rescale} 2s ease infinite;
@@ -92,19 +87,10 @@ function App() {
           <figcaption>Class: CSS-in-JS</figcaption>
         </figure>
         <hr />
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
         <h2 class={animated}>What else?</h2>
         <button class={btn({ color: "midnightblue", size: "2em" })}>
           Click me
         </button>
-        <Btn1 size={2}>Btn is 2em?</Btn1>
         <Btn1 size={4}>
           <span>Is this 4em?</span>
         </Btn1>
@@ -113,10 +99,6 @@ function App() {
           <Icon>Inside?</Icon>
           <Icon>Outside?</Icon>
         </Btn3>
-
-        <Redh2 size="2em" color="red">
-          Styled!
-        </Redh2>
       </header>
     </div>
   );
