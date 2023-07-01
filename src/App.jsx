@@ -1,8 +1,10 @@
+import { createSignal, onMount, onCleanup, createEffect } from "solid-js";
+import SolidCss from "./solidcss";
+
 import logo from "./logo.svg";
 import styles from "./App.module.css";
-import BauCss from "./baucss";
 
-const { css, styled, keyframes } = BauCss();
+const { css, styled, keyframes } = SolidCss();
 
 const Redh2 = (props) => styled("h2")(props)`
 color: ${props.color};
@@ -14,11 +16,28 @@ const Greenp = (props) => styled("p")(props)`
   font-size: "2em";
 `;
 
+const surf = "🏄";
+
+// const Surf = (props) => {
+//   const size = () => props.size;
+//   return <span style={{ "font-size": size() + "px" }}>{props.children}</span>;
+// };
+
+const ASurf = (props) => styled("span")(props)`
+  font-size: ${props.size}px;
+  animation: ${rescale} 2s ease infinite;
+`;
+
 const BtnClass = ({ color, size }) => css`
   border-radius: 6px;
   background-color: teal;
   color: ${color};
   font-size: ${size};
+`;
+
+const rescale = keyframes`
+0% {transform: scale(0.5)}
+100% {transform: scale(1)}
 `;
 
 const rotate = keyframes`
@@ -37,10 +56,15 @@ const animated = css`
   }
 `;
 
-function App() {
+function App(props) {
+  // const [size, setSize] = createSignal(20);
+  // setInterval(() => setSize((s) => (s + 1) % 200), 20);
+
   return (
     <div class={styles.App}>
       <header class={styles.header}>
+        {/* <Surf size={size()}>🏄</Surf> */}
+        <ASurf size={50}>🏄</ASurf>
         <img src={logo} class={styles.logo} alt="logo" />
         <p>
           Edit <code>src/App.jsx</code> and save to reload.

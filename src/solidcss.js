@@ -15,27 +15,15 @@ const addStyle = (target, className, cssText) => {
 const compile = (strings, args) =>
   strings.reduce((acc, value, i) => acc + value + (args[i] ?? ""), "");
 
-export default function BauCss({
+export default function SolidCss({
   document = window.document,
   target = document.head,
 } = {}) {
-  //   const styled =
-  //     (tagName) =>
-  //     (strings, ...args) => {
-  //       const className = doIt((name, compiled) => `.${name} { ${compiled} }`)(
-  //         strings,
-  //         ...args
-  //       );
-  //       const element = document.createElement(tagName);
-  //       element.classList.add(className);
-  //       return element;
-  //     };
-
   const styled =
     (tagName) =>
     (takeProps) =>
     (strings, ...args) => {
-      const className = doIt((name, compiled) => `.${name} { ${compiled} }`)(
+      const className = classIt((name, compiled) => `.${name} { ${compiled} }`)(
         strings,
         ...args
       );
@@ -45,7 +33,7 @@ export default function BauCss({
       return element;
     };
 
-  const doIt =
+  const classIt =
     (styleMake) =>
     (strings, ...args) => {
       const compiled = compile(strings, args);
@@ -56,8 +44,10 @@ export default function BauCss({
     };
   return {
     styled,
-    css: doIt((className, compiled) => `.${className} { ${compiled} }`),
-    keyframes: doIt((name, compiled) => `@keyframes ${name} { ${compiled} }`),
-    createGlobalStyles: doIt((name, compiled) => compiled),
+    css: classIt((className, compiled) => `.${className} { ${compiled} }`),
+    keyframes: classIt(
+      (name, compiled) => `@keyframes ${name} { ${compiled} }`
+    ),
+    createGlobalStyles: classIt((name, compiled) => compiled),
   };
 }
