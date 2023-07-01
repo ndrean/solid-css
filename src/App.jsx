@@ -1,4 +1,4 @@
-import { createSignal, onMount, onCleanup, createEffect } from "solid-js";
+// import { createSignal, onMount, onCleanup, createEffect } from "solid-js";
 import SolidCss from "./solidcss";
 
 import logo from "./logo.svg";
@@ -23,7 +23,7 @@ const surf = "🏄";
 //   return <span style={{ "font-size": size() + "px" }}>{props.children}</span>;
 // };
 
-const ASurf = (props) => styled("span")(props)`
+const AnimSurf = (props) => styled("span")(props)`
   font-size: ${props.size}px;
   animation: ${rescale} 2s ease infinite;
 `;
@@ -64,7 +64,7 @@ function App(props) {
     <div class={styles.App}>
       <header class={styles.header}>
         {/* <Surf size={size()}>🏄</Surf> */}
-        <ASurf size={50}>🏄</ASurf>
+        <AnimSurf size={50}>{surf}</AnimSurf>
         <img src={logo} class={styles.logo} alt="logo" />
         <p>
           Edit <code>src/App.jsx</code> and save to reload.
