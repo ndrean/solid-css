@@ -1,7 +1,21 @@
-import { children, mergeProps } from "solid-js";
-// import { createComponent } from "solid-js/web";
-import h from "solid-js/h";
-import { createComponent } from "solid-js/web";
+import { children, mergeProps, untrack, splitProps } from "solid-js";
+import { Dynamic } from "solid-js/web";
+
+/*
+const ThemeContext = createContext();
+export function ThemeProvider(props) {
+  return createComponent(ThemeContext.Provider, {
+    value: props.theme,
+    get children() {
+      return props.children;
+    },
+  });
+}
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+*/
+
 const toHash = (str) => {
   let i = 0,
     out = 11;
@@ -24,22 +38,21 @@ export default function SolidCss({
   target = document.head,
 } = {}) {
   const styled =
-    (tagName) =>
+    (tag) =>
     (props) =>
     (strings, ...args) => {
-      const className = classIt((name, compiled) => `.${name} { ${compiled} }`)(
+      const newClass = classIt((name, compiled) => `.${name} { ${compiled} }`)(
         strings,
         ...args
       );
+
       const resolved = children(() => props.children);
-      // const elt = document.createElement(tagName);
-      // elt.className = className;
-      // return createComponent(() => elt, {
-      //   get children() {
-      //     return resolved();
-      //   },
-      // });
-      return h(tagName, mergeProps({ class: className }), resolved());
+      const propClass = splitProps(props, ["class"])[0].class;
+      return Dynamic({
+        component: tag,
+        classList: { [propClass]: true, [newClass]: true },
+        children: resolved(),
+      });
     };
 
   const classIt =
@@ -51,6 +64,7 @@ export default function SolidCss({
         addStyle(target, name, styleMake(name, compiled));
       return name;
     };
+
   return {
     styled,
     css: classIt((className, compiled) => `.${className} { ${compiled} }`),

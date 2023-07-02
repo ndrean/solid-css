@@ -1,4 +1,4 @@
-import SolidCss from "./solidcss";
+import SolidCss from "../src/solidcss";
 import logo from "./logo.svg";
 const { css, keyframes } = SolidCss();
 
@@ -22,6 +22,8 @@ export default (props) => (
     height={props.size}
     width={props.size}
     class={logoCss}
-    alt="logo"
+    role="image"
+    alt="logo SolidJS"
+    {...props}
   />
 );
