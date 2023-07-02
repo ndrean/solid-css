@@ -1,20 +1,5 @@
-import { children, mergeProps, untrack, splitProps } from "solid-js";
+import { children, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
-
-/*
-const ThemeContext = createContext();
-export function ThemeProvider(props) {
-  return createComponent(ThemeContext.Provider, {
-    value: props.theme,
-    get children() {
-      return props.children;
-    },
-  });
-}
-export function useTheme() {
-  return useContext(ThemeContext);
-}
-*/
 
 const toHash = (str) => {
   let i = 0,
@@ -38,8 +23,7 @@ export default function SolidCss({
   target = document.head,
 } = {}) {
   const styled =
-    (tag) =>
-    (props) =>
+    (tag, props) =>
     (strings, ...args) => {
       const newClass = classIt((name, compiled) => `.${name} { ${compiled} }`)(
         strings,

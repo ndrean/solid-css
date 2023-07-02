@@ -33,7 +33,7 @@ const headerCL = css`
   color: white;
 `;
 
-const AnimSurf = (props) => styled("span")(props)`
+const AnimSurf = (props) => styled("span", props)`
   font-size: ${props.size}em;
   animation: ${rescale} 2s ease infinite;
 `;
@@ -61,10 +61,10 @@ const animated = css`
   }
 `;
 
-const D = (props) => styled("div")(props)`
+const D = (props) => styled("div", props)`
   text-align: center;
 `;
-const P = (props) => styled("p")(props)`
+const P = (props) => styled("p", props)`
   color: midnightblue;
   background-color: bisque;
   font-size: 4em;
