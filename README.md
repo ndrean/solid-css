@@ -39,7 +39,7 @@ const bluediv = css`
 <div class={bluediv}>I am blue</div>;
 ```
 
-## Build a styled component with `styled`:
+## Build a styled component with `styled`
 
 ```js
 const P = (props) => styled("p", props)`
