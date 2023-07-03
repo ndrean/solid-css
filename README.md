@@ -9,15 +9,15 @@ npm i bau-solidcss
 ```
 
 ```js
-import SolidCss from "bau-solidcss";
-const { css, styled, keyframes } = SolidCss();
+import BauSolidCss from "bau-solidcss";
+const { css, styled, keyframes } = BauSolidCss();
 ```
 
 ## Worked example
 
 <https://githubbox.com/ndrean/solid-css/blob/main/example/App.jsx>
 
-## `solidcss` package
+## `bau-solidcss` package
 
 It exports `css`to build classes, `keyframes` to build animations, `createGlobalStyles` for global styles and `styled` to build styled components.
 
@@ -45,7 +45,7 @@ const P = (props) => styled("p", props)`
 ### Overwrite the style of "styled components"
 
 ```js
-const Biskred = (props) => (
+const B = (props) => (
   <P
     color="midnightblue"
     class={css`
@@ -55,6 +55,8 @@ const Biskred = (props) => (
     {props.children}
   </P>
 );
+
+<B> A bisqued "P"</B>;
 ```
 
 ### Conditional classes

@@ -1,10 +1,10 @@
 import { render } from "solid-js/web";
 import { createSignal } from "solid-js";
-import SolidCss from "bau-solidcss";
+import BauSolidCss from "bau-solidcss";
 
 import Logo from "./logo";
 
-const { css, keyframes, styled, createGlobalStyles } = SolidCss();
+const { css, keyframes, styled, createGlobalStyles } = BauSolidCss();
 
 createGlobalStyles`
   body {

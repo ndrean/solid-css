@@ -1,9 +1,9 @@
 {
   "name": "bau-solidcss",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "css-in-js for SolidJS",
-  "main": "./dist/solidcss.umd.cjs",
+  "main": "./dist/bau-solidcss.umd.cjs",
   "author": "Neven Drean",
   "repository": {
     "type": "git",
@@ -16,11 +16,11 @@
   "files": [
     "dist"
   ],
-  "module": "./dist/solidcss.js",
+  "module": "./dist/bau-solidcss.js",
   "exports": {
     ".": {
-      "import": "./dist/solidcss.js",
-      "require": "./dist/solidcss.umd.cjs"
+      "import": "./dist/bau-solidcss.js",
+      "require": "./dist/bau-solidcss.umd.cjs"
     }
   },
   "scripts": {
@@ -34,6 +34,6 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "bau-solidcss": "^0.1.1"
+    "bau-solidcss": "^0.1.2"
   }
 }

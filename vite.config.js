@@ -4,12 +4,12 @@ import { defineConfig } from "vite";
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "src/solidcss.js"),
-      name: "binyJS",
-      fileName: "solidcss.js",
+      entry: resolve(__dirname, "src/bau-solidcss.js"),
+      name: "bau-solidcss",
+      fileName: "bau-solidcss.js",
     },
     rollupOptions: {
-      external: ["solid-js"],
+      external: ["solid-js", "solid-js/web"],
     },
   },
 });

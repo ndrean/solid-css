@@ -18,7 +18,7 @@ const addStyle = (target, className, cssText) => {
 const compile = (strings, args) =>
   strings.reduce((acc, value, i) => acc + value + (args[i] ?? ""), "");
 
-export default function SolidCss({
+export default function BauSolidCss({
   document = window.document,
   target = document.head,
 } = {}) {

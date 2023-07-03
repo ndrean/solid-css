@@ -1,6 +1,7 @@
-import SolidCss from "../src/solidcss";
+// import BauSolidCss from "../src/bau-solidcss";
+import BauSolidCss from "bau-solidcss";
 import logo from "./logo.svg";
-const { css, keyframes } = SolidCss();
+const { css, keyframes } = BauSolidCss();
 
 const logoSpin = keyframes`
     from {
