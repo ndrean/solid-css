@@ -1,11 +1,12 @@
 # CSS-in-JS for SolidJS
 
-Shamlessly copied from BauCSS, added `styled` for SolidJS
+Shamlessly copied BauCSS, added `styled` for SolidJS.
+[![npm bundle size](https://img.badgesize.io/ndrean/solid-css/main/src/bau-solidcss.js?compression=gzip)](https://bundlephobia.com/package/bau-solidcss@0.1.10)
 
 ## Usage
 
 ```bash
-npm i bau-solidcss
+pnpm i bau-solidcss
 ```
 
 ```js
