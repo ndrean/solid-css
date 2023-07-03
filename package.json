@@ -1,7 +1,7 @@
 {
   "name": "bau-solidcss",
   "private": false,
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "css-in-js for SolidJS",
   "author": "Neven Drean",
   "license": "BSD",
@@ -22,6 +22,7 @@
   "files": [
     "bau-solidcss.js"
   ],
+  "main": "./src/bau-solidcss.js",
   "module": "./src/bau-solidcss.js",
   "scripts": {
     "dev": "vite",
