@@ -33,7 +33,9 @@ export default function BauSolidCss({
       return Dynamic(
         mergeProps({
           component: tag,
-          classList: { [newClass]: true, [propClass.class]: true },
+          // overwrite CSS with a new css string in the component
+          classList: { [newClass]: true, [propClass?.class]: true },
+          // pass in the props: children, listeners, attributes...
           ...rest,
         })
       );

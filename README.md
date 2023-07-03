@@ -28,6 +28,8 @@ It exports `css`to build classes, `keyframes` to build animations, `createGlobal
 
 ### Build a class with `css`
 
+You write template strings, pass it to the function `css` to build a `class`.
+
 ```js
 const bluediv = css`
   background-color: bisque;
