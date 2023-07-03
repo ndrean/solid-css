@@ -5,11 +5,11 @@ Shamlessly copied from BauCSS, added `styled` for SolidJS
 ## Usage
 
 ```bash
-npm i solidcss
+npm i bau-solidcss
 ```
 
 ```js
-import SolidCss from "solidcss";
+import SolidCss from "bau-solidcss";
 const { css, styled, keyframes } = SolidCss();
 ```
 
