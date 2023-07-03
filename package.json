@@ -20,8 +20,10 @@
   },
   "type": "module",
   "files": [
-    "bau-solidcss.js"
+    "bau-solidcss.js",
+    "bau-solidcss.d.ts"
   ],
+  "types": "bau-solidcss.d.ts",
   "main": "bau-solidcss",
   "module": "./src/bau-solidcss.js",
   "scripts": {
