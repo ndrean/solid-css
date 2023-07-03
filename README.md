@@ -15,7 +15,11 @@ const { css, styled, keyframes } = BauSolidCss();
 
 ## Worked example
 
-<https://githubbox.com/ndrean/solid-css/blob/main/example/App.jsx>
+```bash
+cd example
+pnpm i
+pnpm run dev
+```
 
 ## `bau-solidcss` package
 
@@ -29,7 +33,7 @@ const bluediv = css`
   color: midnightblue;
 `;
 
-<div class={rediv}>I am blue</div>;
+<div class={bluediv}>I am blue</div>;
 ```
 
 - build a styled component with `styled`:
@@ -39,6 +43,7 @@ const P = (props) => styled("p", props)`
   color: ${props.color} ?? teal;
 `;
 
+<P>I am teal</P>
 <P color="red">I am red</P>;
 ```
 

@@ -1,4 +1,4 @@
-import { children, mergeProps, splitProps } from "solid-js";
+import { mergeProps, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 const toHash = (str) => {
