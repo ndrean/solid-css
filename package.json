@@ -34,6 +34,7 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "bau-solidcss": "^0.1.2"
+    "bau-solidcss": "^0.1.2",
+    "solid-js": "^1.7.7"
   }
 }
