@@ -1,6 +1,7 @@
 import { render } from "solid-js/web";
 import { createSignal } from "solid-js";
-import BauSolidCss from "../src/bau-solidcss";
+// import BauSolidCss from "../src/bau-solidcss";
+import BauSolidCss from "bau-solidcss";
 
 import Logo from "./logo";
 
@@ -113,9 +114,9 @@ const App = () => {
   const [size, setSize] = createSignal(2);
 
   return (
-    <div>
+    <section class={headerCL}>
       <D>
-        <P>base class</P>
+        <P>Base styled component</P>
         <P
           class={css`
             ${other}
@@ -140,26 +141,25 @@ const App = () => {
       <Btn danger disabled size={1.5}>
         Danger disabled
       </Btn>
-      <section class={headerCL}>
-        <input
-          type="range"
-          min={1}
-          max={3}
-          step={0.2}
-          value={size()}
-          onchange={(e) => setSize(e.target.value)}
-        />
 
-        <Dyn size={size()}>Dynamic</Dyn>
-        <figure>
-          <Logo size={100} />
-          <figcaption>CSS-in-JS</figcaption>
-        </figure>
-        <AnimSurf>🏄</AnimSurf>
-        <AnimSurf size={2}>🏄</AnimSurf>
-        <h2 class={animated}>What else?</h2>
-      </section>
-    </div>
+      <input
+        type="range"
+        min={1}
+        max={3}
+        step={0.2}
+        value={size()}
+        onchange={(e) => setSize(e.target.value)}
+      />
+
+      <Dyn size={size()}>Dynamic</Dyn>
+      <figure>
+        <Logo size={100} />
+        <figcaption>CSS-in-JS</figcaption>
+      </figure>
+      <AnimSurf>🏄</AnimSurf>
+      <AnimSurf size={2}>🏄</AnimSurf>
+      <h2 class={animated}>What else?</h2>
+    </section>
   );
 };
 
