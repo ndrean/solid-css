@@ -1,9 +1,8 @@
 import { render } from "solid-js/web";
 import { createSignal } from "solid-js";
-import SolidCss from "../src/solidcss";
+import SolidCss from "bau-solidcss";
 
 import Logo from "./logo";
-import Hamburger from "./hamburger";
 
 const { css, keyframes, styled, createGlobalStyles } = SolidCss();
 
@@ -34,7 +33,7 @@ const headerCL = css`
 `;
 
 const AnimSurf = (props) => styled("span", props)`
-  font-size: ${props.size}em;
+  font-size: ${props.size ?? 1}em;
   animation: ${rescale} 2s ease infinite;
 `;
 
@@ -67,15 +66,48 @@ const D = (props) => styled("div", props)`
 const P = (props) => styled("p", props)`
   color: midnightblue;
   background-color: bisque;
-  font-size: 4em;
+  font-size: 2em;
 `;
 
 const other = `
+  font-size: 1em;
   color: grey;
   &:hover {
-    padding: 0.1em;
+    padding: 0.5em;
   }
 `;
+
+const styles = (props) => ({
+  root: `
+    color: dodgerblue; 
+    cursor: pointer; 
+    font-size: ${props.size ?? 1}em; 
+    border-radius: 0.2em;
+    padding: 0.2em;
+  `,
+  danger: `
+    color: red;
+    animation: ${rescale} 1s ease infinite;
+  `,
+  disabled: `
+    pointer-events: none; 
+    opacity: 0.5;
+  `,
+});
+
+const Btn = (props) =>
+  styled("button", props)`
+    ${styles(props).root +
+    (props.danger ? styles(props).danger : "") +
+    (props.disabled ? styles(props).disabled : "")}
+  `;
+
+const Dyn = (props) => {
+  const size = () => props.size || 1;
+  return (
+    <div style={{ "font-size": `${size()}` + "em" }}>{props.children}</div>
+  );
+};
 
 const App = () => {
   const [size, setSize] = createSignal(2);
@@ -89,25 +121,42 @@ const App = () => {
             ${other}
           `}
         >
-          class overwrite: must pass the CSS string
+          Overwrite CSS of Styled component: must pass the CSS string
         </P>
       </D>
       <br />
+      <Btn
+        class={css`
+          background-color: bisque;
+        `}
+        onClick={() => window.alert("hi")}
+      >
+        Base click
+      </Btn>
+
+      <Btn danger size={1.5} onClick={() => alert("danger")}>
+        Danger click
+      </Btn>
+      <Btn danger disabled size={1.5}>
+        Danger disabled
+      </Btn>
       <section class={headerCL}>
         <input
           type="range"
           min={1}
-          max={2}
+          max={3}
           step={0.2}
           value={size()}
           onchange={(e) => setSize(e.target.value)}
         />
-        <Hamburger color="bisque" size={size() * 40} />
+
+        <Dyn size={size()}>Dynamic</Dyn>
         <figure>
           <Logo size={100} />
           <figcaption>CSS-in-JS</figcaption>
         </figure>
-        <AnimSurf size={size()}>🏄</AnimSurf>
+        <AnimSurf>🏄</AnimSurf>
+        <AnimSurf size={2}>🏄</AnimSurf>
         <h2 class={animated}>What else?</h2>
       </section>
     </div>

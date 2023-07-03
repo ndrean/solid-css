@@ -1,4 +1,4 @@
-import { children, splitProps } from "solid-js";
+import { children, mergeProps, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 const toHash = (str) => {
@@ -29,14 +29,14 @@ export default function SolidCss({
         strings,
         ...args
       );
-
-      const resolved = children(() => props.children);
-      const propClass = splitProps(props, ["class"])[0].class;
-      return Dynamic({
-        component: tag,
-        classList: { [propClass]: true, [newClass]: true },
-        children: resolved(),
-      });
+      const [propClass, rest] = splitProps(props, ["class"]);
+      return Dynamic(
+        mergeProps({
+          component: tag,
+          classList: { [newClass]: true, [propClass.class]: true },
+          ...rest,
+        })
+      );
     };
 
   const classIt =

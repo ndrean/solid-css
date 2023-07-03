@@ -1,20 +1,15 @@
-import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
-// import devtools from 'solid-devtools/vite';
+import { resolve } from "path";
+import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [
-    /* 
-    Uncomment the following line to enable solid-devtools.
-    For more info see https://github.com/thetarnav/solid-devtools/tree/main/packages/extension#readme
-    */
-    // devtools(),
-    solidPlugin(),
-  ],
-  server: {
-    port: 3000,
-  },
   build: {
-    target: 'esnext',
+    lib: {
+      entry: resolve(__dirname, "src/solidcss.js"),
+      name: "binyJS",
+      fileName: "solidcss.js",
+    },
+    rollupOptions: {
+      external: ["solid-js"],
+    },
   },
 });
