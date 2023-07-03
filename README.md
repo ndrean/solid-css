@@ -113,7 +113,7 @@ const rescale = keyframes`
 100% {transform: scale(1)}
 `;
 
-const AnimSurf = (props) => styled("span")(props)`
+const AnimSurf = (props) => styled("span", props)`
   font-size: ${props.size}em;
   animation: ${rescale} 2s ease infinite;
 `;

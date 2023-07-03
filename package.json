@@ -1,7 +1,7 @@
 {
   "name": "bau-solidcss",
   "private": false,
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "css-in-js for SolidJS",
   "author": "Neven Drean",
   "license": "BSD",
@@ -37,7 +37,7 @@
     "vite": "^4.3.9",
     "vite-plugin-solid": "^2.7.0"
   },
-  "dependencies": {
+  "peerdependencies": {
     "solid-js": "^1.7.7"
   }
 }
