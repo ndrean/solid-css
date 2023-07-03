@@ -1,0 +1,21 @@
+{
+  "name": "example",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "bau-solidcss": "^0.1.2"
+  },
+  "devDependencies": {
+    "i": "^0.3.7",
+    "npm": "^9.7.2",
+    "solid-devtools": "^0.27.3",
+    "vite": "^4.3.9",
+    "vite-plugin-solid": "^2.7.0"
+  }
+}

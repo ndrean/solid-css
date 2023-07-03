@@ -1,6 +1,6 @@
 import { render } from "solid-js/web";
 import { createSignal } from "solid-js";
-import BauSolidCss from "bau-solidcss";
+import BauSolidCss from "../src/bau-solidcss";
 
 import Logo from "./logo";
 
