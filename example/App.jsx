@@ -114,52 +114,56 @@ const App = () => {
   const [size, setSize] = createSignal(2);
 
   return (
-    <section class={headerCL}>
-      <D>
-        <P>Base styled component</P>
-        <P
+    <div>
+      <section class={headerCL}>
+        <D>
+          <P>Base styled component</P>
+          <P
+            class={css`
+              ${other}
+            `}
+          >
+            Overwrite CSS of Styled component: must pass the CSS string
+          </P>
+        </D>
+        <br />
+        <Btn
           class={css`
-            ${other}
+            background-color: bisque;
           `}
+          onClick={() => window.alert("hi")}
         >
-          Overwrite CSS of Styled component: must pass the CSS string
-        </P>
-      </D>
-      <br />
-      <Btn
-        class={css`
-          background-color: bisque;
-        `}
-        onClick={() => window.alert("hi")}
-      >
-        Base click
-      </Btn>
+          Base click
+        </Btn>
 
-      <Btn danger size={1.5} onClick={() => alert("danger")}>
-        Danger click
-      </Btn>
-      <Btn danger disabled size={1.5}>
-        Danger disabled
-      </Btn>
+        <Btn danger size={1.5} onClick={() => alert("danger")}>
+          Danger click
+        </Btn>
+        <Btn danger disabled size={1.5}>
+          Danger disabled
+        </Btn>
 
-      <input
-        type="range"
-        min={1}
-        max={3}
-        step={0.2}
-        value={size()}
-        onchange={(e) => setSize(e.target.value)}
-      />
+        <input
+          type="range"
+          min={1}
+          max={3}
+          step={0.2}
+          value={size()}
+          onchange={(e) => setSize(e.target.value)}
+        />
 
-      <Dyn size={size()}>Dynamic</Dyn>
-      <figure>
-        <Logo size={100} />
-        <figcaption>CSS-in-JS</figcaption>
-      </figure>
-      <AnimSurf>🏄</AnimSurf>
-      <AnimSurf size={2}>🏄</AnimSurf>
-      <h2 class={animated}>What else?</h2>
-    </section>
+        <Dyn size={size()}>Dynamic</Dyn>
+      </section>
+      <section>
+        <figure>
+          <Logo size={100} />
+          <figcaption>CSS-in-JS</figcaption>
+        </figure>
+        <AnimSurf>🏄</AnimSurf>
+        <AnimSurf size={2}>🏄</AnimSurf>
+        <h2 class={animated}>What else?</h2>
+      </section>
+    </div>
   );
 };
 
