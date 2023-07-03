@@ -1,7 +1,7 @@
 {
   "name": "bau-solidcss",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "css-in-js for SolidJS",
   "main": "./dist/solidcss.umd.cjs",
   "author": "Neven Drean",
@@ -34,6 +34,6 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "bau-solidcss": "^0.1.0"
+    "bau-solidcss": "^0.1.1"
   }
 }
