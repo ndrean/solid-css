@@ -1,9 +1,10 @@
 import { render } from "solid-js/web";
 import { createSignal } from "solid-js";
+import BauSolidCss from "/bau-solidcss";
 // import BauSolidCss from "../src/bau-solidcss";
-import BauSolidCss from "bau-solidcss";
 
 import Logo from "./logo";
+import { BasicBtn, StBtn, CondStBtn } from "./button.jsx";
 
 const { css, keyframes, styled, createGlobalStyles } = BauSolidCss();
 
@@ -61,47 +62,19 @@ const animated = css`
   }
 `;
 
-const D = (props) => styled("div", props)`
-  text-align: center;
-`;
 const P = (props) => styled("p", props)`
   color: midnightblue;
   background-color: bisque;
-  font-size: 2em;
+  font-size: 1em;
 `;
 
-const other = `
+const other = css`
   font-size: 1em;
   color: grey;
   &:hover {
     padding: 0.5em;
   }
 `;
-
-const styles = (props) => ({
-  root: `
-    color: dodgerblue; 
-    cursor: pointer; 
-    font-size: ${props.size ?? 1}em; 
-    border-radius: 0.2em;
-    padding: 0.2em;
-  `,
-  danger: `
-    color: red;
-    animation: ${rescale} 1s ease infinite;
-  `,
-  disabled: `
-    pointer-events: none; 
-    opacity: 0.5;
-  `,
-});
-
-const Btn = (props) =>
-  styled("button", props)`
-    ${styles(props).root +
-    (props.danger ? styles(props).danger : "") +
-    (props.disabled ? styles(props).disabled : "")}
-  `;
 
 const Dyn = (props) => {
   const size = () => props.size || 1;
@@ -111,38 +84,45 @@ const Dyn = (props) => {
 };
 
 const App = () => {
-  const [size, setSize] = createSignal(2);
+  const [size, setSize] = createSignal(1);
 
   return (
     <div>
       <section class={headerCL}>
-        <D>
-          <P>Base styled component</P>
-          <P
-            class={css`
-              ${other}
-            `}
-          >
-            Overwrite CSS of Styled component: must pass the CSS string
-          </P>
-        </D>
+        <P class={other}>
+          This is a styled component. You can extend the base class rules but
+          not overwrite them.
+        </P>
         <br />
-        <Btn
+        <p>Conditional Classes</p>
+        <BasicBtn onClick={() => alert("hi")}>Base style</BasicBtn>
+        <br />
+        <StBtn danger="true" onClick={() => alert("danger")}>
+          Conditional v1
+        </StBtn>
+        <br />
+        <CondStBtn>Base</CondStBtn>
+        <CondStBtn
+          disabled
+          size={1.2}
           class={css`
-            background-color: bisque;
+            box-shadow: 6px -6px teal;
           `}
-          onClick={() => window.alert("hi")}
         >
-          Base click
-        </Btn>
-
-        <Btn danger size={1.5} onClick={() => alert("danger")}>
-          Danger click
-        </Btn>
-        <Btn danger disabled size={1.5}>
-          Danger disabled
-        </Btn>
-
+          Conditional v2 disabled
+        </CondStBtn>
+        <br />
+        <CondStBtn
+          class={css`
+            box-shadow: 6px -6px bisque;
+          `}
+          danger="true"
+          size={2}
+          onClick={() => alert(2)}
+        >
+          Conditional v2 danger
+        </CondStBtn>
+        <br />
         <input
           type="range"
           min={1}
@@ -153,13 +133,11 @@ const App = () => {
         />
 
         <Dyn size={size()}>Dynamic</Dyn>
-      </section>
-      <section>
+
         <figure>
           <Logo size={100} />
           <figcaption>CSS-in-JS</figcaption>
         </figure>
-        <AnimSurf>🏄</AnimSurf>
         <AnimSurf size={2}>🏄</AnimSurf>
         <h2 class={animated}>What else?</h2>
       </section>

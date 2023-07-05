@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "bau-solidcss": "^0.1.7"
+    "bau-solidcss": "^0.1.12"
   },
   "devDependencies": {
     "i": "^0.3.7",
