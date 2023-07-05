@@ -71,6 +71,8 @@ const B = (props) => (
 
 ### Conditional classes
 
+Take CSS rules in the form of the object below:
+
 ```js
 const styles = (props) => {
   base: `
@@ -101,7 +103,7 @@ const Btn = (props) =>
   `;
 ```
 
-Alternatively, the `styled` primitive merges the styles when you use props to declare the style.
+Alternatively, the `styled` primitive merges the styles when you use props to declare the style from the object of styles above:
 
 ```jsx
 const Button = (props) => styled("button", props)`
