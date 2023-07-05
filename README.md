@@ -11,7 +11,7 @@ pnpm i bau-solidcss
 
 ```js
 import BauSolidCss from "bau-solidcss";
-const { css, styled, keyframes } = BauSolidCss();
+const { css, styled, keyframes, createGlobalStyles } = BauSolidCss();
 ```
 
 ## Worked example
@@ -24,7 +24,7 @@ pnpm run dev
 
 ## `bau-solidcss` package
 
-It exports `css`to build classes, `keyframes` to build animations, `createGlobalStyles` for global styles and `styled` to build styled components.
+It exports 4 primitives: `css`to build classes, `keyframes` to build animations, `createGlobalStyles` for global styles and `styled` to build styled components and easy conditional styling.
 
 ### Build a class with `css`
 
@@ -39,7 +39,7 @@ const bluediv = css`
 <div class={bluediv}>I am blue</div>;
 ```
 
-## Build a styled component with `styled`
+### Build a styled component with `styled`
 
 ```js
 const P = (props) => styled("p", props)`
@@ -50,7 +50,9 @@ const P = (props) => styled("p", props)`
 <P color="red">I am red</P>;
 ```
 
-### Overwrite the style of "styled components"
+### Add rules to a styled component
+
+Yo ucan extend rules, not overwrite them. To overwrite them, use the conditional form with props, see below.
 
 ```js
 const B = (props) => (
@@ -70,25 +72,62 @@ const B = (props) => (
 ### Conditional classes
 
 ```js
-const styles = (props) => ({
-  root: `color: dodgerblue; cursor: pointer; font-size: ${props.size ?? 1}em;`,
-  danger: `color: red;`,
-  disabled: `pointer-events: none; opacity: 0.5;`,
-});
+const styles = (props) => {
+  base: `
+    cursor: pointer;
+    font-size: ${props.size ?? 1}em;
+    border-radius: 0.3em;
+    padding: 0.3em;
+  `,
+  danger: `
+    color: red;
+    animation: ${rescale} 1s ease infinite;
+  `,
+  disabled: `
+    pointer-events: none;
+    opacity: ${props.opacity};
+  `;
+}
+```
 
+You can do:
+
+```js
 const Btn = (props) =>
   styled("button", props)`
     ${styles(props).root +
     (props.danger ? styles(props).danger : "") +
     (props.disabled ? styles(props).disabled : "")}
   `;
+```
 
-// usage:
-<Btn size={2} onClick={()=> alert('hi')}>Base</Btn>
-<Btn danger>Danger</Btn>
-<Btn danger disabled size={3}>
-  Danger disabled
-</Btn>
+Alternatively, the `styled` primitive merges the styles when you use props to declare the style.
+
+```jsx
+const Button = (props) => styled("button", props)`
+  ${styles(props).base}
+  ${styles(props)}
+`;
+```
+
+Now you can use it:
+
+```jsx
+// the 1st version:
+<Btn size={2} onClick={()=> alert('hi')}>Base size 2</Btn>
+<Btn danger="true">Danger</Btn>
+
+//or the second version
+<Button>Base Button</Button>
+<Button
+  danger="true"
+  size={1.5}
+  className={css`
+    box-shadow: 6px -6px bisque;
+  `}
+>
+  Shadowed Danger
+</Button>;
 ```
 
 ### Reactive style of a component
@@ -125,3 +164,14 @@ const AnimSurf = (props) => styled("span", props)`
 ```
 
 ### Global style with `createGlobalStyles`
+
+```js
+createGlobalStyles`
+  :root {
+    margin: 0;
+  }
+  body {
+    text-align: center;
+  }
+`;
+```

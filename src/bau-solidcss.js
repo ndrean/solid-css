@@ -1,6 +1,8 @@
 import { mergeProps, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
+const classNames = (...cn) => [...cn].join(" ");
+
 const toHash = (str) => {
   let i = 0,
     out = 11;
@@ -15,8 +17,28 @@ const addStyle = (target, className, cssText) => {
   target.append(style);
 };
 
-const compile = (strings, args) =>
-  strings.reduce((acc, value, i) => acc + value + (args[i] ?? ""), "");
+const merge = (type, compiled, target) => {
+  const name = toHash(compiled);
+  !document.getElementById(name) && type
+    ? addStyle(target, name, `${type}${name} { ${compiled}}`)
+    : addStyle(target, name, compiled);
+  return name;
+};
+
+const compileStyles = (rest, strings, args) =>
+  strings.reduce((acc, value, i) => {
+    if (typeof args[i] !== "object") {
+      return acc + value + (args[i] ?? "");
+    } else {
+      const otherProps = Object.keys(rest).filter(
+        (k) => typeof rest[k] !== "function" && rest[k]
+      );
+      const condCss = Object.entries(args[i]).reduce((accn, [k, v]) => {
+        return otherProps.includes(k) ? accn + v : accn;
+      }, "");
+      return acc + value + condCss;
+    }
+  }, "");
 
 export default function BauSolidCss({
   document = window.document,
@@ -25,38 +47,30 @@ export default function BauSolidCss({
   const styled =
     (tag, props) =>
     (strings, ...args) => {
-      const newClass = classIt((name, compiled) => `.${name} { ${compiled} }`)(
-        strings,
-        ...args
-      );
       const [propClass, rest] = splitProps(props, ["class"]);
+      const compiledStyles = compileStyles(rest, strings, args);
+      const name = merge(".", compiledStyles, target);
+
       return Dynamic(
         mergeProps({
           component: tag,
-          // overwrite CSS with a new css string in the component
-          classList: { [newClass]: true, [propClass?.class]: true },
+          // additional class in the component: doesn't overwrite
+          class: classNames(name, propClass.class),
           // pass in the props: children, listeners, attributes...
           ...rest,
         })
       );
     };
 
-  const classIt =
-    (styleMake) =>
-    (strings, ...args) => {
-      const compiled = compile(strings, args);
-      const name = toHash(compiled);
-      !document.getElementById(name) &&
-        addStyle(target, name, styleMake(name, compiled));
-      return name;
-    };
+  const mergeIt =
+    (type) =>
+    (strings, ...args) =>
+      merge(type, compileStyles("", strings, args), target);
 
   return {
     styled,
-    css: classIt((className, compiled) => `.${className} { ${compiled} }`),
-    keyframes: classIt(
-      (name, compiled) => `@keyframes ${name} { ${compiled} }`
-    ),
-    createGlobalStyles: classIt((name, compiled) => compiled),
+    css: mergeIt("."),
+    keyframes: mergeIt("@keyframes "),
+    createGlobalStyles: mergeIt(),
   };
 }
