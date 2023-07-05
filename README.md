@@ -103,7 +103,7 @@ const Btn = (props) =>
   `;
 ```
 
-Alternatively, the `styled` primitive merges the styles when you use props to declare the style from the object of styles above:
+Alternatively, the `styled` primitive merges the styles when you use props to declare the style and use the object above:
 
 ```jsx
 const Button = (props) => styled("button", props)`
@@ -123,6 +123,7 @@ Now you can use it:
 <Button>Base Button</Button>
 <Button
   danger="true"
+  disabled
   size={1.5}
   className={css`
     box-shadow: 6px -6px bisque;
