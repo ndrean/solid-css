@@ -58,10 +58,10 @@ const main = css`
 
 ```js
 const P = (props) => styled("p", props)`
-  color: ${props.color};
+  color: ${props.color ?? "var(--main-color)"};
 `;
 
-<P>I am teal</P>
+<P>I am blue</P>
 <P color="red">I am red</P>;
 ```
 

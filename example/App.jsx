@@ -67,7 +67,7 @@ const animated = css`
 `;
 
 const P = (props) => styled("p", props)`
-  color: var(--main-color);
+  color: ${props.color ?? "var(--main-color)"};
   background-color: bisque;
   font-size: 1em;
 `;
@@ -93,6 +93,7 @@ const App = () => {
   return (
     <div>
       <section class={headerCL}>
+        <P>Test</P>
         <P class={other}>
           This is a styled component. You can extend the base class rules but
           not overwrite them.
