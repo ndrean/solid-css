@@ -26,6 +26,21 @@ pnpm run dev
 
 It exports 4 primitives: `css`to build classes, `keyframes` to build animations, `createGlobalStyles` for global styles and `styled` to build styled components and easy conditional styling.
 
+### Global style with `createGlobalStyles`
+
+```js
+createGlobalStyles`
+  :root {
+    margin: 0;
+    --main-color: midnightblue;
+  }
+  
+  body {
+    text-align: center;
+  }
+`;
+```
+
 ### Build a class with `css`
 
 You write template strings, pass it to the function `css` to build a `class`.
@@ -164,17 +179,4 @@ const AnimSurf = (props) => styled("span", props)`
 `;
 
 <AnimSurf size={3}>🏄</AnimSurf>;
-```
-
-### Global style with `createGlobalStyles`
-
-```js
-createGlobalStyles`
-  :root {
-    margin: 0;
-  }
-  body {
-    text-align: center;
-  }
-`;
 ```

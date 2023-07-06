@@ -9,6 +9,10 @@ import { BasicBtn, StBtn, CondStBtn } from "./button.jsx";
 const { css, keyframes, styled, createGlobalStyles } = BauSolidCss();
 
 createGlobalStyles`
+  :root {
+    --main-color: midnightblue;
+  }
+
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -63,7 +67,7 @@ const animated = css`
 `;
 
 const P = (props) => styled("p", props)`
-  color: midnightblue;
+  color: var(--main-color);
   background-color: bisque;
   font-size: 1em;
 `;
