@@ -58,7 +58,7 @@ const main = css`
 
 ```js
 const P = (props) => styled("p", props)`
-  color: ${props.color} ?? teal;
+  color: ${props.color};
 `;
 
 <P>I am teal</P>
