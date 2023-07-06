@@ -157,7 +157,7 @@ const [size, setSize] = createSignal(1)
 const Dyn = (props) => {
   const size = () => props.size || 1;
   return (
-    <div style={{ "font-size": `${size()}` + "em" }}>{props.children}</div>
+    <div style={{ "font-size": `${size()}em` }}>{props.children}</div>
   );
 };
 
