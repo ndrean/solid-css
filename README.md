@@ -31,12 +31,12 @@ It exports 4 primitives: `css`to build classes, `keyframes` to build animations,
 You write template strings, pass it to the function `css` to build a `class`.
 
 ```js
-const bluediv = css`
+const main = css`
   background-color: bisque;
-  color: midnightblue;
+  color: var(--main-color);
 `;
 
-<div class={bluediv}>I am blue</div>;
+<div class={main}>I am an div</div>;
 ```
 
 ### Build a styled component with `styled`
