@@ -19,9 +19,11 @@ const addStyle = (target, className, cssText) => {
 
 const merge = (type, compiled, target) => {
   const name = toHash(compiled);
-  !document.getElementById(name) && type
-    ? addStyle(target, name, `${type}${name} { ${compiled}}`)
-    : addStyle(target, name, compiled);
+  if (!document.getElementById(name)) {
+    type
+      ? addStyle(target, name, `${type}${name} { ${compiled}}`)
+      : addStyle(target, name, compiled);
+  }
   return name;
 };
 
